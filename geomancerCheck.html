@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ジオマンサーチェック</title>
+    <script>
+        function test(){
+            let val=document.getElementById("value").value;
+            val=val.match(/2D:\[.*?\]/g).map(e=>e.replace("2D:","").replace("[","").replace("]",""));
+            let count=0;
+            let count2=0;
+            val.forEach(element=>{
+                let value=element;
+                let arr=value.split(/\s/);
+                arr.forEach(element => {
+                    let ar2=element.split(",");
+                    if(ar2[0]==ar2[1]) count++;
+                    if(Number(ar2[0])+Number(ar2[1])==7) count2++
+                });
+            })
+            document.getElementById("result").value=count;
+            document.getElementById("result2").value=count2;
+        }
+    </script>
+</head>
+<body>
+    <textarea id="value" onchange="test()"></textarea><br>
+    ゾロ目回数：<input type="number" disabled id="result">回<br>
+    出目7回数：<input type="number" disabled id="result2">回<br>
+</body>
+</html>
